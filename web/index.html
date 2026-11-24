@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rush Hour Radar · Delhi bus crowding planner</title>
+<meta name="description" content="Plan Delhi bus journeys by travel time and how crowded the bus usually is, estimated from 2.56 million October 2026 tickets.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f2a44'/%3E%3Crect x='7' y='8' width='18' height='13' rx='3' fill='none' stroke='white' stroke-width='2'/%3E%3Ccircle cx='11.5' cy='24' r='2' fill='white'/%3E%3Ccircle cx='20.5' cy='24' r='2' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--ink)"/><rect x="7" y="8" width="18" height="13" rx="3" fill="none" stroke="var(--paper)" stroke-width="2"/><circle cx="11.5" cy="24" r="2" fill="var(--paper)"/><circle cx="20.5" cy="24" r="2" fill="var(--paper)"/></svg>
+    <span>Rush Hour <b>Radar</b></span>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" data-tab="plan" aria-selected="true">Plan</button>
+    <button role="tab" data-tab="routes" aria-selected="false">Routes</button>
+    <button role="tab" data-tab="ops" aria-selected="false">Operators</button>
+    <button role="tab" data-tab="evidence" aria-selected="false">Method &amp; evidence</button>
+  </nav>
+  <div class="chip chip-note" title="Estimates describe a typical day of that type, built from October 2026 tickets. They do not use live bus positions.">Typical day · Oct 2026 tickets · not live</div>
+</header>
+
+<main id="main">
+  <!-- PLAN -->
+  <section id="tab-plan" class="page" role="tabpanel">
+    <div class="split">
+      <div class="panel">
+        <form id="plan-form" class="card search" autocomplete="off">
+          <div class="field">
+            <label for="from">From</label>
+            <input id="from" placeholder="Stop or area, e.g. Anand Vihar" aria-autocomplete="list">
+            <ul class="suggest" id="from-s" role="listbox" hidden></ul>
+          </div>
+          <button type="button" class="swap" id="swap" aria-label="Swap origin and destination" title="Swap">⇅</button>
+          <div class="field">
+            <label for="to">To</label>
+            <input id="to" placeholder="Stop or area, e.g. Connaught Place" aria-autocomplete="list">
+            <ul class="suggest" id="to-s" role="listbox" hidden></ul>
+          </div>
+          <div class="row">
+            <div class="seg" id="day" role="group" aria-label="Day type">
+              <button type="button" data-v="weekday" aria-pressed="true">Weekday</button>
+              <button type="button" data-v="saturday" aria-pressed="false">Sat</button>
+              <button type="button" data-v="sunday_holiday" aria-pressed="false">Sun / holiday</button>
+            </div>
+            <div class="field time"><label for="time">Leave at</label><input id="time" type="time" value="18:00"></div>
+          </div>
+          <div class="field">
+            <label>Prefer <span class="hint" id="mode-hint"></span></label>
+            <div class="seg wide" id="mode" role="group" aria-label="Preference">
+              <button type="button" data-v="fastest" aria-pressed="false">Fastest</button>
+              <button type="button" data-v="balanced" aria-pressed="true">Balanced</button>
+              <button type="button" data-v="comfortable" aria-pressed="false">Comfortable</button>
+            </div>
+          </div>
+          <button class="primary" id="go" type="submit">Find buses</button>
+          <button type="button" class="link" id="preset">Try: Anand Vihar → Connaught Place, weekday 6 PM</button>
+        </form>
+        <div id="plan-out" aria-live="polite"></div>
+      </div>
+      <div class="mapwrap"><div id="map-plan" class="map" role="img" aria-label="Map of the selected journey coloured by crowding"></div>
+        <div class="legend" id="legend-plan"></div></div>
+    </div>
+  </section>
+
+  <!-- ROUTES -->
+  <section id="tab-routes" class="page" role="tabpanel" hidden>
+    <div class="split rsplit">
+      <div class="panel">
+        <div class="card">
+          <div class="field"><label for="route-q">Route</label>
+            <input id="route-q" placeholder="Type a route number, e.g. 85 or 534" autocomplete="off">
+            <ul class="suggest" id="route-s" hidden></ul></div>
+          <div class="seg" id="rday" role="group" aria-label="Day type">
+            <button type="button" data-v="weekday" aria-pressed="true">Weekday</button>
+            <button type="button" data-v="saturday" aria-pressed="false">Sat</button>
+            <button type="button" data-v="sunday_holiday" aria-pressed="false">Sun / holiday</button>
+          </div>
+          <div class="field"><label for="rtime">Time of day <b id="rtime-v">18:00</b></label>
+            <input id="rtime" type="range" min="0" max="47" step="1" value="36"></div>
+        </div>
+        <div id="route-info" class="card" hidden></div>
+      </div>
+      <div class="stack">
+        <div class="mapwrap short"><div id="map-route" class="map"></div><div class="legend" id="legend-route"></div></div>
+        <div class="card"><h3>Crowding along the route, through the day</h3>
+          <p class="sub">Each row is a stretch between two stops (route start at the top). Faded cells rest on few tickets. Hover or tap a cell for the estimate.</p>
+          <div id="heat-wrap"><canvas id="heat" aria-label="Heat strip of crowding by stretch and time of day"></canvas></div>
+          <div id="heat-tip" class="tip" hidden></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPERATORS -->
+  <section id="tab-ops" class="page" role="tabpanel" hidden>
+    <div class="ops-head">
+      <h2>Where the next bus helps most</h2>
+      <div class="seg" id="oday" role="group" aria-label="Day type">
+        <button type="button" data-v="weekday" aria-pressed="true">Weekday</button>
+        <button type="button" data-v="saturday" aria-pressed="false">Sat</button>
+        <button type="button" data-v="sunday_holiday" aria-pressed="false">Sun / holiday</button>
+      </div>
+    </div>
+    <div class="caution" id="ops-caution"></div>
+    <div class="grid2">
+      <div class="card"><h3>Highest-relief route-hours</h3>
+        <p class="sub">Rider-minutes of overload removed by adding one bus per hour, with demand held fixed. Rows with thin ticket evidence are marked.</p>
+        <div class="scroll"><table id="ops-top"></table></div></div>
+      <div class="card"><h3>What if we add buses?</h3>
+        <div id="whatif"><p class="sub">Select a row to test it.</p></div></div>
+    </div>
+    <div class="card"><h3>Overload by route and hour</h3>
+      <p class="sub">The 25 routes with the most overload. Darker means more rider-minutes above 80% of crush capacity.</p>
+      <div id="ops-heat" class="scroll"></div></div>
+    <div class="card"><h3>Underused route-hours</h3>
+      <p class="sub">Daytime hours with at least 2 buses per hour where even the busiest stretch stays under half the seats (moderate or high evidence only).</p>
+      <div class="scroll"><table id="ops-under"></table></div></div>
+  </section>
+
+  <!-- EVIDENCE -->
+  <section id="tab-evidence" class="page" role="tabpanel" hidden>
+    <div id="evidence"></div>
+  </section>
+</main>
+
+<footer class="foot">Built on Delhi Transport Stack data (October 2026 e-tickets, static GTFS). Crowding is a model estimate of a typical day, not a live measurement. Map © OpenStreetMap contributors, © CARTO.</footer>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>
