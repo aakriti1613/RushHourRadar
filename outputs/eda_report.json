@@ -1,0 +1,186 @@
+{
+  "metadata": {
+    "dataset": "data/interim/tickets.parquet",
+    "total_tickets": 2559899,
+    "days_covered": 31,
+    "date_range": [
+      "2026-10-01",
+      "2026-10-31"
+    ]
+  },
+  "category_1_volume_calendar": {
+    "weekday_median_tickets": 95709.5,
+    "weekday_median_pax": 101941.0,
+    "holiday_threshold_tickets": 71782.125,
+    "holiday_candidates": [
+      {
+        "date": "2026-10-02",
+        "day": "Friday",
+        "tickets": 41016,
+        "ratio_to_median": 0.429
+      },
+      {
+        "date": "2026-10-20",
+        "day": "Tuesday",
+        "tickets": 49375,
+        "ratio_to_median": 0.516
+      }
+    ],
+    "mon_fri_vs_tue_thu_diff_pct": 6.21,
+    "pax_distribution": {
+      "p50": 1.0,
+      "p90": 1.0,
+      "p99": 3.0,
+      "p999": 3.0,
+      "max_pax": 6.0
+    },
+    "exact_duplicates": 0,
+    "outage_day_hours": 0,
+    "classification": "Clean weekdays with 2 distinct holiday dips (Oct 2 Gandhi Jayanti, Oct 20 Dussehra)"
+  },
+  "category_2_fleet_scope_kappa": {
+    "mean_daily_pax_clean_weekday": 102302.6,
+    "mean_daily_pax_all_days": 88826.0,
+    "published_dtc_cluster_ridership": 4080000.0,
+    "published_dtc_only_ridership": 2450000.0,
+    "recommended_kappa": 39.9,
+    "recommended_kappa_grid": [
+      23.9,
+      31.9,
+      39.9,
+      49.9
+    ],
+    "ac_share": [
+      {
+        "is_ac": false,
+        "tickets": 500807,
+        "pax": 540686.0,
+        "pct_tickets": 19.56
+      },
+      {
+        "is_ac": true,
+        "tickets": 2059092,
+        "pax": 2212920.0,
+        "pct_tickets": 80.44
+      }
+    ],
+    "classification": "DTC + Cluster comprehensive coverage (~2.5% ticketing capture)"
+  },
+  "category_3_vehicle_bus_size": {
+    "null_vehicle_pct": 48.52,
+    "non_null_vehicle_cnt": 1317732,
+    "median_tickets_per_vehicle_day": 5.0,
+    "density_classification": "Sparse to moderate (<40 tickets/veh-day); validates using route-segment aggregation rather than per-trip counts",
+    "top_prefixes": [
+      {
+        "prefix": "DL51EV",
+        "cnt": 275794,
+        "pct": 20.93
+      },
+      {
+        "prefix": "DL1PD4",
+        "cnt": 203287,
+        "pct": 15.43
+      },
+      {
+        "prefix": "DL1PD5",
+        "cnt": 183650,
+        "pct": 13.94
+      },
+      {
+        "prefix": "DL1PD8",
+        "cnt": 174135,
+        "pct": 13.21
+      },
+      {
+        "prefix": "DL1PD7",
+        "cnt": 137941,
+        "pct": 10.47
+      },
+      {
+        "prefix": "DL51GD",
+        "cnt": 122975,
+        "pct": 9.33
+      },
+      {
+        "prefix": "DL1PD9",
+        "cnt": 118314,
+        "pct": 8.98
+      },
+      {
+        "prefix": "DL1PD6",
+        "cnt": 84131,
+        "pct": 6.38
+      },
+      {
+        "prefix": "DL1PE0",
+        "cnt": 17505,
+        "pct": 1.33
+      }
+    ],
+    "bus_size_mix_recommendation": "12m standard fleet (38 seats / 75 max cap) with 9m feeders (28 seats / 50 max cap)"
+  },
+  "category_4_fare_ticket_type": {
+    "ticket_type_distribution": [
+      {
+        "ticket_type_id": 1,
+        "cnt": 2559899,
+        "pct": 100.0
+      }
+    ],
+    "zero_fare_count": 8,
+    "zero_fare_pct": 0.0003,
+    "modal_fares": [
+      {
+        "is_ac": false,
+        "fare": 9.0,
+        "cnt": 187278
+      },
+      {
+        "is_ac": false,
+        "fare": 4.5,
+        "cnt": 175801
+      },
+      {
+        "is_ac": false,
+        "fare": 13.5,
+        "cnt": 117405
+      },
+      {
+        "is_ac": false,
+        "fare": 18.0,
+        "cnt": 10676
+      },
+      {
+        "is_ac": false,
+        "fare": 27.0,
+        "cnt": 8306
+      },
+      {
+        "is_ac": false,
+        "fare": 40.5,
+        "cnt": 1339
+      },
+      {
+        "is_ac": false,
+        "fare": 22.5,
+        "cnt": 1
+      },
+      {
+        "is_ac": false,
+        "fare": 0.0,
+        "cnt": 1
+      }
+    ],
+    "classification": "Paid digital tickets with standard 10% discount (e.g. 9 on 10, 13.5 on 15, 22 on 25). Pass holders embedded in global kappa anchor"
+  },
+  "category_5_route_stop_matchability": {
+    "total_distinct_ticket_routes": 2259,
+    "route_up_down_parse_rate_pct": 97.3,
+    "gtfs_routes_match_pct": 99.91,
+    "gtfs_ticket_volume_match_pct": 99.98,
+    "same_stop_count": 103,
+    "same_stop_pct": 0.004,
+    "classification": "High matchability: 99.98% ticket volume maps to static GTFS routes"
+  }
+}

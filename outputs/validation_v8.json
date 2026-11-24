@@ -1,0 +1,161 @@
+{
+  "generated_by": "validation/05_validate.py",
+  "checks": [
+    {
+      "id": "J1",
+      "title": "Tickets matched to the stop sequence; fare grows with distance",
+      "status": "pass",
+      "summary": "Share of passengers whose boarding and alighting stops were matched to a route's stop order, and a check that fares rise with GTFS distance.",
+      "metrics": {
+        "passengers matched %": 93.58,
+        "tickets dropped (unmatched or alighting not after boarding)": "164,207 (6.4% of tickets)",
+        "start = end rows dropped": 103,
+        "fare vs distance Spearman (AC / non-AC)": {
+          "non-AC": 0.83,
+          "AC": 0.791
+        },
+        "routes with direction-vote flips > 30%": 2
+      }
+    },
+    {
+      "id": "J2",
+      "title": "Predicting a week the model has not seen",
+      "status": "pass",
+      "summary": "Leave-one-week-out on weekdays (test weeks 1-4). Prior, prior strength and range calibration are re-fit without the test week.",
+      "metrics": {
+        "held-out deviance, this model vs raw cell rate vs v7": [
+          0.212,
+          0.401,
+          0.229
+        ],
+        "Spearman, cells with >= 30 tickets (this / raw / v7)": [
+          0.815,
+          0.818,
+          0.755
+        ],
+        "10-90% range coverage by ticket bucket": {
+          "<10": 0.921,
+          "10-29": 0.8,
+          "30-99": 0.806,
+          ">=100": 0.808
+        },
+        "v7 coverage by ticket bucket (for comparison)": {
+          "<10": 0.875,
+          "10-29": 0.717,
+          "30-99": 0.623,
+          ">=100": 0.518
+        },
+        "weekends": "reported separately in outputs/eval/summary.json; one day per week so folds are low-power"
+      }
+    },
+    {
+      "id": "J3",
+      "title": "Matches known patterns: peaks, weekends, hubs",
+      "status": "pass",
+      "summary": "Bus-minute-weighted mean load on weekdays, weekday vs weekend ticket volume per day, and the busiest boarding areas (stops grouped within ~400 m). The pass criterion covers the peak and weekend ratios; the hub list is reported as-is.",
+      "metrics": {
+        "morning peak (08:30-10:00) vs midday (13:00-14:30), load ratio": 5.93,
+        "evening peak (18:00-20:00) vs midday, load ratio": 3.86,
+        "tickets-passengers per day by day type": {
+          "saturday": 76048.0,
+          "sunday_holiday": 46906.0,
+          "weekday": 95753.0
+        },
+        "Saturday / weekday volume": 0.79,
+        "Sunday-or-holiday / weekday volume": 0.49,
+        "known hubs among the 60 busiest boarding areas (stop clusters; rank)": {
+          "anand vihar": 13,
+          "nehru place": 6,
+          "aiims": 35,
+          "karol bagh": 37,
+          "dhaula kuan": 18,
+          "lajpat nagar": 49
+        },
+        "known hubs not in the top 60 areas": [
+          "kashmere gate",
+          "azadpur",
+          "rajiv chowk",
+          "connaught",
+          "shivaji stadium",
+          "new delhi",
+          "old delhi",
+          "kaushambi",
+          "sarai kale khan",
+          "nizamuddin"
+        ]
+      }
+    },
+    {
+      "id": "J4",
+      "title": "Plausibility and sensitivity",
+      "status": "note",
+      "summary": "No independent on-board counts exist, so these are plausibility checks, not accuracy. Absolute headcounts depend on the scale factor and capacity cap below.",
+      "metrics": {
+        "daytime ticketed weekday cells above crush capacity %": 1.842,
+        "... above 1.5x crush capacity %": 0.222,
+        "bus-minute-weighted mean load, 06:00-22:00 weekdays (riders per bus)": 10.2,
+        "back-of-envelope load factor (inputs unverified)": "about 20 riders per bus from ~630 boardings/bus-day x ~7 km / ~210 bus-km/day; fleet size, trip length and speed must be confirmed before quoting",
+        "tier unchanged if the scale factor changes (kappa 23.9 / 31.9 / 49.9), %": {
+          "23.9": 90.1,
+          "31.9": 94.8,
+          "49.9": 93.5
+        },
+        "routes whose scale factor is capped by physical capacity": "678 of 2554 (84% of ticketed passengers)",
+        "city ridership implied after the cap vs published": "54%  (ticket capture is clearly not uniform across routes)",
+        "not run": "alighting-kernel on/off, 30 vs 60 minute bins, timestamp +/-5 min: require re-running the credits stage"
+      }
+    },
+    {
+      "id": "J5",
+      "title": "Journey planner behaves as specified",
+      "status": "pass",
+      "summary": "Nine origin-destination pairs including one needing a change. Checks: distinct buses, requested departure never dropped, time-shifted options only if strictly better crowding, sane times.",
+      "metrics": {
+        "pairs passing all checks": "9 / 9",
+        "failing": "none",
+        "warm query latency ms (median / max)": [
+          5.2,
+          135.4
+        ],
+        "per pair": {
+          "Anand Vihar -> Connaught Place 18:00": "3 options, transfers [0]",
+          "Kashmere Gate -> Nehru Place 09:00": "3 options, transfers [0]",
+          "Azadpur -> AIIMS 08:30": "3 options, transfers [0]",
+          "Rohini -> Karol Bagh 18:30": "3 options, transfers [0]",
+          "Badarpur -> Mehrauli 17:30": "2 options, transfers [0]",
+          "Najafgarh -> Tilak Nagar 08:30": "3 options, transfers [0]",
+          "Jahangirpuri -> Old Delhi 08:00": "3 options, transfers [0]",
+          "Punjabi Bagh -> Azadpur 10:00": "3 options, transfers [0]",
+          "Sarita Vihar -> Mandi House 09:00": "3 options, transfers [1]"
+        }
+      }
+    },
+    {
+      "id": "J6",
+      "title": "Blind spots and the per-trip running count",
+      "status": "note",
+      "summary": "Where the estimate is weakest, and the brief's per-trip running count as a diagnostic (tickets per vehicle-day are too few for it to be the main method).",
+      "metrics": {
+        "weekday cells with High / Low evidence %": {
+          "High": 13.0,
+          "Low": 69.4
+        },
+        "Saturday High-evidence cells %": 3.9,
+        "Sunday/holiday High-evidence cells %": 2.0,
+        "weekday routes with no tickets at all": 453,
+        "least-evidenced weekday routes (< 10 tickets)": [
+          "DS-15DOWN",
+          "DS-1DOWN",
+          "DS-23DOWN",
+          "DS-9UP",
+          "MAHARANA PRATAP ISBT TO BARAUT UP"
+        ],
+        "vehicle-days with >= 15 tickets (trip diagnostic)": 13872,
+        "trips with >= 4 tickets": 29948,
+        "Spearman: per-trip peak running tagged load vs model cell rate": 0.296,
+        "known gaps": "late night, sparse feeder (DS-*) routes, weekends (4-5 days), October festivals, uneven ticketing adoption, 12 m default bus size, scale factor rests on press-sourced ridership"
+      }
+    }
+  ],
+  "runtime_s": 143.6
+}

@@ -1,0 +1,44 @@
+{
+  "model_version": "v8",
+  "selected_hyperparameters": {
+    "prior_shape_a": 2.0,
+    "smoothing": false,
+    "alpha_by_bucket": [
+      0.0,
+      0.08,
+      0.08,
+      0.05
+    ],
+    "source": "outputs/eval/summary.json"
+  },
+  "kappa_global": 39.9,
+  "capacity_ceiling_factor": 1.5,
+  "cap_quantile": 0.99,
+  "cap_min_tickets": 30,
+  "routes_total": 2554,
+  "routes_kappa_capped": 678,
+  "kappa_r_quantiles": {
+    "0.05": 14.29,
+    "0.25": 37.88,
+    "0.5": 39.9,
+    "0.75": 39.9
+  },
+  "share_tagged_pax_on_capped_routes": 0.8393,
+  "routes_with_non_default_bus_class": 0,
+  "weekday_tier_share": {
+    "Seats Available": 0.9309,
+    "Standing Room": 0.0461,
+    "Crowded": 0.023
+  },
+  "weekday_trust_share": {
+    "Low": 0.6944,
+    "Medium": 0.176,
+    "High": 0.1296
+  },
+  "ticketed_weekday_cells": 1010331,
+  "ticketed_cells_over_1x_max_cap_pct": 1.842,
+  "ticketed_cells_over_1_5x_max_cap_pct": 0.222,
+  "max_est_load": 254.9,
+  "runtime_s": 24.5,
+  "implied_daily_weekday_ridership_vs_published": 0.5377
+}

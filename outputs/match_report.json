@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "total_raw_tickets": 2559899,
+    "total_raw_pax": 2753606
+  },
+  "match_performance": {
+    "matched_tickets": 2395589,
+    "matched_tickets_pct": 93.58,
+    "matched_pax": 2576730,
+    "matched_pax_pct": 93.58,
+    "target_pax_pct": 93.0,
+    "target_achieved": true
+  },
+  "dropped_summary": {
+    "dropped_same_stop": 103,
+    "dropped_unmatched_or_reversed": 164207,
+    "total_dropped": 164310
+  },
+  "day_type_distribution": {
+    "weekday": 1793047,
+    "saturday": 352822,
+    "sunday_holiday": 249720
+  },
+  "routes_with_high_direction_flips": [
+    {
+      "route": "134UP",
+      "primary": 161,
+      "flipped": 88,
+      "flip_pct": 35.34
+    },
+    {
+      "route": "D-9904UP",
+      "primary": 30,
+      "flipped": 72,
+      "flip_pct": 70.59
+    }
+  ],
+  "cached_lookups_count": 73198,
+  "execution_seconds": 37.08
+}

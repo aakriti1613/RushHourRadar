@@ -1,0 +1,870 @@
+{
+  "protocol": "leave-one-week-out, test weeks 1-4 (Mon-Sun), target = held-out tagged riders per scheduled bus",
+  "kappa_for_tiers": 39.9,
+  "capacity_for_tiers": {
+    "seats": 38.0,
+    "max_cap": 75.0
+  },
+  "selected": {
+    "model": "v8 a=2.0 smooth=0",
+    "prior_shape_a": 2.0,
+    "smoothing": false,
+    "alpha_by_bucket": [
+      0.0,
+      0.08,
+      0.08,
+      0.05
+    ],
+    "bucket_edges": [
+      [
+        0,
+        10
+      ],
+      [
+        10,
+        30
+      ],
+      [
+        30,
+        100
+      ],
+      [
+        100,
+        1000000000
+      ]
+    ],
+    "bucket_names": [
+      "<10",
+      "10-29",
+      "30-99",
+      ">=100"
+    ]
+  },
+  "prior_shape_grid": {
+    "v8 a=0.25 smooth=0": 0.22279,
+    "v8 a=0.25 smooth=1": 0.22675,
+    "v8 a=0.5 smooth=0": 0.21805,
+    "v8 a=0.5 smooth=1": 0.2257,
+    "v8 a=1.0 smooth=0": 0.21443,
+    "v8 a=1.0 smooth=1": 0.22549,
+    "v8 a=2.0 smooth=0": 0.21241,
+    "v8 a=2.0 smooth=1": 0.22653,
+    "v8 a=4.0 smooth=0": 0.21275,
+    "v8 a=4.0 smooth=1": 0.22941,
+    "v8 a=8.0 smooth=0": 0.21639,
+    "v8 a=8.0 smooth=1": 0.23469
+  },
+  "comparison_weekday": [
+    {
+      "model": "B0 route x hour mean",
+      "bucket": "10-29",
+      "n": 119235,
+      "spearman": 0.3557,
+      "spearman_sd": 0.0125,
+      "wmae": 0.8387,
+      "deviance": 0.8457,
+      "tier_agree": 0.4418,
+      "tier_f1": 0.3837
+    },
+    {
+      "model": "B0 route x hour mean",
+      "bucket": "30-99",
+      "n": 26620,
+      "spearman": 0.4539,
+      "spearman_sd": 0.0151,
+      "wmae": 1.974,
+      "deviance": 1.9784,
+      "tier_agree": 0.8528,
+      "tier_f1": 0.3152
+    },
+    {
+      "model": "B0 route x hour mean",
+      "bucket": "<10",
+      "n": 1374771,
+      "spearman": 0.6408,
+      "spearman_sd": 0.0039,
+      "wmae": 0.2085,
+      "deviance": 0.3289,
+      "tier_agree": 0.8955,
+      "tier_f1": 0.4364
+    },
+    {
+      "model": "B0 route x hour mean",
+      "bucket": ">=100",
+      "n": 1070,
+      "spearman": 0.4516,
+      "spearman_sd": 0.0154,
+      "wmae": 5.0521,
+      "deviance": 4.9023,
+      "tier_agree": 0.9992,
+      "tier_f1": 0.8748
+    },
+    {
+      "model": "B0 route x hour mean",
+      "bucket": "all",
+      "n": 1521696,
+      "spearman": 0.7243,
+      "spearman_sd": 0.0075,
+      "wmae": 0.3164,
+      "deviance": 0.4236,
+      "tier_agree": 0.8587,
+      "tier_f1": 0.5824
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": "10-29",
+      "n": 119235,
+      "spearman": 0.7033,
+      "spearman_sd": 0.0306,
+      "wmae": 0.5687,
+      "deviance": 0.4006,
+      "tier_agree": 0.6389,
+      "tier_f1": 0.5469
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": "30-99",
+      "n": 26620,
+      "spearman": 0.8179,
+      "spearman_sd": 0.026,
+      "wmae": 1.0352,
+      "deviance": 0.4736,
+      "tier_agree": 0.9636,
+      "tier_f1": 0.4393
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": "<10",
+      "n": 1374771,
+      "spearman": 0.7153,
+      "spearman_sd": 0.004,
+      "wmae": 0.1404,
+      "deviance": 0.3992,
+      "tier_agree": 0.921,
+      "tier_f1": 0.5381
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": ">=100",
+      "n": 1070,
+      "spearman": 0.8465,
+      "spearman_sd": 0.044,
+      "wmae": 2.0578,
+      "deviance": 0.6297,
+      "tier_agree": 1.0,
+      "tier_f1": 1.0
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": "all",
+      "n": 1521696,
+      "spearman": 0.7905,
+      "spearman_sd": 0.0063,
+      "wmae": 0.2049,
+      "deviance": 0.4014,
+      "tier_agree": 0.8993,
+      "tier_f1": 0.6869
+    },
+    {
+      "model": "v7 posterior (b0=20)",
+      "bucket": "10-29",
+      "n": 119235,
+      "spearman": 0.6349,
+      "spearman_sd": 0.0276,
+      "wmae": 0.5878,
+      "deviance": 0.4038,
+      "tier_agree": 0.61,
+      "tier_f1": 0.5251
+    },
+    {
+      "model": "v7 posterior (b0=20)",
+      "bucket": "30-99",
+      "n": 26620,
+      "spearman": 0.7549,
+      "spearman_sd": 0.026,
+      "wmae": 1.1667,
+      "deviance": 0.6216,
+      "tier_agree": 0.9655,
+      "tier_f1": 0.4557
+    },
+    {
+      "model": "v7 posterior (b0=20)",
+      "bucket": "<10",
+      "n": 1374771,
+      "spearman": 0.7123,
+      "spearman_sd": 0.0033,
+      "wmae": 0.1436,
+      "deviance": 0.1974,
+      "tier_agree": 0.9214,
+      "tier_f1": 0.5187
+    },
+    {
+      "model": "v7 posterior (b0=20)",
+      "bucket": ">=100",
+      "n": 1070,
+      "spearman": 0.7966,
+      "spearman_sd": 0.0319,
+      "wmae": 2.4882,
+      "deviance": 1.0311,
+      "tier_agree": 1.0,
+      "tier_f1": 1.0
+    },
+    {
+      "model": "v7 posterior (b0=20)",
+      "bucket": "all",
+      "n": 1521696,
+      "spearman": 0.7862,
+      "spearman_sd": 0.008,
+      "wmae": 0.2134,
+      "deviance": 0.229,
+      "tier_agree": 0.8973,
+      "tier_f1": 0.6786
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": "10-29",
+      "n": 119235,
+      "spearman": 0.6958,
+      "spearman_sd": 0.0308,
+      "wmae": 0.5693,
+      "deviance": 0.3776,
+      "tier_agree": 0.6334,
+      "tier_f1": 0.5432
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": "30-99",
+      "n": 26620,
+      "spearman": 0.8153,
+      "spearman_sd": 0.0264,
+      "wmae": 1.039,
+      "deviance": 0.4781,
+      "tier_agree": 0.9635,
+      "tier_f1": 0.4409
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": "<10",
+      "n": 1374771,
+      "spearman": 0.7167,
+      "spearman_sd": 0.0028,
+      "wmae": 0.1402,
+      "deviance": 0.186,
+      "tier_agree": 0.9238,
+      "tier_f1": 0.5361
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": ">=100",
+      "n": 1070,
+      "spearman": 0.846,
+      "spearman_sd": 0.0437,
+      "wmae": 2.0638,
+      "deviance": 0.6345,
+      "tier_agree": 1.0,
+      "tier_f1": 1.0
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": "all",
+      "n": 1521696,
+      "spearman": 0.7896,
+      "spearman_sd": 0.0081,
+      "wmae": 0.2049,
+      "deviance": 0.2124,
+      "tier_agree": 0.9013,
+      "tier_f1": 0.6873
+    }
+  ],
+  "ablation_weekday": [
+    {
+      "model": "B1 raw cell rate",
+      "bucket": "10-29",
+      "n": 119235,
+      "spearman": 0.7033,
+      "spearman_sd": 0.0306,
+      "wmae": 0.5687,
+      "deviance": 0.4006,
+      "tier_agree": 0.6389,
+      "tier_f1": 0.5469
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": "30-99",
+      "n": 26620,
+      "spearman": 0.8179,
+      "spearman_sd": 0.026,
+      "wmae": 1.0352,
+      "deviance": 0.4736,
+      "tier_agree": 0.9636,
+      "tier_f1": 0.4393
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": "<10",
+      "n": 1374771,
+      "spearman": 0.7153,
+      "spearman_sd": 0.004,
+      "wmae": 0.1404,
+      "deviance": 0.3992,
+      "tier_agree": 0.921,
+      "tier_f1": 0.5381
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": ">=100",
+      "n": 1070,
+      "spearman": 0.8465,
+      "spearman_sd": 0.044,
+      "wmae": 2.0578,
+      "deviance": 0.6297,
+      "tier_agree": 1.0,
+      "tier_f1": 1.0
+    },
+    {
+      "model": "B1 raw cell rate",
+      "bucket": "all",
+      "n": 1521696,
+      "spearman": 0.7905,
+      "spearman_sd": 0.0063,
+      "wmae": 0.2049,
+      "deviance": 0.4014,
+      "tier_agree": 0.8993,
+      "tier_f1": 0.6869
+    },
+    {
+      "model": "v8 - hierarchy (flat city prior)",
+      "bucket": "10-29",
+      "n": 119235,
+      "spearman": 0.6715,
+      "spearman_sd": 0.0318,
+      "wmae": 0.5871,
+      "deviance": 0.4186,
+      "tier_agree": 0.5954,
+      "tier_f1": 0.5172
+    },
+    {
+      "model": "v8 - hierarchy (flat city prior)",
+      "bucket": "30-99",
+      "n": 26620,
+      "spearman": 0.7944,
+      "spearman_sd": 0.0265,
+      "wmae": 1.125,
+      "deviance": 0.579,
+      "tier_agree": 0.9537,
+      "tier_f1": 0.424
+    },
+    {
+      "model": "v8 - hierarchy (flat city prior)",
+      "bucket": "<10",
+      "n": 1374771,
+      "spearman": 0.676,
+      "spearman_sd": 0.0064,
+      "wmae": 0.1596,
+      "deviance": 0.2115,
+      "tier_agree": 0.9271,
+      "tier_f1": 0.5282
+    },
+    {
+      "model": "v8 - hierarchy (flat city prior)",
+      "bucket": ">=100",
+      "n": 1070,
+      "spearman": 0.8312,
+      "spearman_sd": 0.0431,
+      "wmae": 2.3071,
+      "deviance": 0.8291,
+      "tier_agree": 1.0,
+      "tier_f1": 1.0
+    },
+    {
+      "model": "v8 - hierarchy (flat city prior)",
+      "bucket": "all",
+      "n": 1521696,
+      "spearman": 0.7602,
+      "spearman_sd": 0.0058,
+      "wmae": 0.2262,
+      "deviance": 0.2415,
+      "tier_agree": 0.9011,
+      "tier_f1": 0.68
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": "10-29",
+      "n": 119235,
+      "spearman": 0.6958,
+      "spearman_sd": 0.0308,
+      "wmae": 0.5693,
+      "deviance": 0.3776,
+      "tier_agree": 0.6334,
+      "tier_f1": 0.5432
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": "30-99",
+      "n": 26620,
+      "spearman": 0.8153,
+      "spearman_sd": 0.0264,
+      "wmae": 1.039,
+      "deviance": 0.4781,
+      "tier_agree": 0.9635,
+      "tier_f1": 0.4409
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": "<10",
+      "n": 1374771,
+      "spearman": 0.7167,
+      "spearman_sd": 0.0028,
+      "wmae": 0.1402,
+      "deviance": 0.186,
+      "tier_agree": 0.9238,
+      "tier_f1": 0.5361
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": ">=100",
+      "n": 1070,
+      "spearman": 0.846,
+      "spearman_sd": 0.0437,
+      "wmae": 2.0638,
+      "deviance": 0.6345,
+      "tier_agree": 1.0,
+      "tier_f1": 1.0
+    },
+    {
+      "model": "v8 a=2.0 smooth=0",
+      "bucket": "all",
+      "n": 1521696,
+      "spearman": 0.7896,
+      "spearman_sd": 0.0081,
+      "wmae": 0.2049,
+      "deviance": 0.2124,
+      "tier_agree": 0.9013,
+      "tier_f1": 0.6873
+    },
+    {
+      "model": "v8 a=2.0 smooth=1",
+      "bucket": "10-29",
+      "n": 119235,
+      "spearman": 0.5963,
+      "spearman_sd": 0.0277,
+      "wmae": 0.6158,
+      "deviance": 0.4284,
+      "tier_agree": 0.5983,
+      "tier_f1": 0.513
+    },
+    {
+      "model": "v8 a=2.0 smooth=1",
+      "bucket": "30-99",
+      "n": 26620,
+      "spearman": 0.7104,
+      "spearman_sd": 0.0263,
+      "wmae": 1.2521,
+      "deviance": 0.6899,
+      "tier_agree": 0.9703,
+      "tier_f1": 0.4839
+    },
+    {
+      "model": "v8 a=2.0 smooth=1",
+      "bucket": "<10",
+      "n": 1374771,
+      "spearman": 0.7168,
+      "spearman_sd": 0.0036,
+      "wmae": 0.1465,
+      "deviance": 0.1898,
+      "tier_agree": 0.9213,
+      "tier_f1": 0.5104
+    },
+    {
+      "model": "v8 a=2.0 smooth=1",
+      "bucket": ">=100",
+      "n": 1070,
+      "spearman": 0.6994,
+      "spearman_sd": 0.0049,
+      "wmae": 2.7048,
+      "deviance": 1.2693,
+      "tier_agree": 0.9998,
+      "tier_f1": 0.875
+    },
+    {
+      "model": "v8 a=2.0 smooth=1",
+      "bucket": "all",
+      "n": 1521696,
+      "spearman": 0.7896,
+      "spearman_sd": 0.0086,
+      "wmae": 0.2209,
+      "deviance": 0.2265,
+      "tier_agree": 0.8963,
+      "tier_f1": 0.6731
+    }
+  ],
+  "coverage": {
+    "v8_selected_by_bucket": {
+      "<10": {
+        "alpha": 0.0,
+        "coverage": 0.921,
+        "cells": 1125488
+      },
+      "10-29": {
+        "alpha": 0.08,
+        "coverage": 0.8,
+        "cells": 248474
+      },
+      "30-99": {
+        "alpha": 0.08,
+        "coverage": 0.806,
+        "cells": 124151
+      },
+      ">=100": {
+        "alpha": 0.05,
+        "coverage": 0.808,
+        "cells": 23582
+      }
+    },
+    "v8_overall": 0.89,
+    "v7_phi1_by_bucket": {
+      "<10": 0.875,
+      "10-29": 0.717,
+      "30-99": 0.623,
+      ">=100": 0.518
+    },
+    "v7_phi1_overall": 0.823,
+    "bucketing": "distinct tickets of the cell in the training weeks",
+    "grid": [
+      {
+        "alpha": 0.0,
+        "bucket": "<10",
+        "coverage": 0.921,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.0,
+        "bucket": "10-29",
+        "coverage": 0.746,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.0,
+        "bucket": "30-99",
+        "coverage": 0.668,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.0,
+        "bucket": ">=100",
+        "coverage": 0.578,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.02,
+        "bucket": "<10",
+        "coverage": 0.922,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.02,
+        "bucket": "10-29",
+        "coverage": 0.762,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.02,
+        "bucket": "30-99",
+        "coverage": 0.714,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.02,
+        "bucket": ">=100",
+        "coverage": 0.7,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.05,
+        "bucket": "<10",
+        "coverage": 0.924,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.05,
+        "bucket": "10-29",
+        "coverage": 0.782,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.05,
+        "bucket": "30-99",
+        "coverage": 0.767,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.05,
+        "bucket": ">=100",
+        "coverage": 0.808,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.08,
+        "bucket": "<10",
+        "coverage": 0.925,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.08,
+        "bucket": "10-29",
+        "coverage": 0.8,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.08,
+        "bucket": "30-99",
+        "coverage": 0.806,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.08,
+        "bucket": ">=100",
+        "coverage": 0.868,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.12,
+        "bucket": "<10",
+        "coverage": 0.927,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.12,
+        "bucket": "10-29",
+        "coverage": 0.821,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.12,
+        "bucket": "30-99",
+        "coverage": 0.845,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.12,
+        "bucket": ">=100",
+        "coverage": 0.916,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.16,
+        "bucket": "<10",
+        "coverage": 0.929,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.16,
+        "bucket": "10-29",
+        "coverage": 0.839,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.16,
+        "bucket": "30-99",
+        "coverage": 0.874,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.16,
+        "bucket": ">=100",
+        "coverage": 0.943,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.2,
+        "bucket": "<10",
+        "coverage": 0.93,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.2,
+        "bucket": "10-29",
+        "coverage": 0.855,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.2,
+        "bucket": "30-99",
+        "coverage": 0.896,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.2,
+        "bucket": ">=100",
+        "coverage": 0.96,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.3,
+        "bucket": "<10",
+        "coverage": 0.933,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.3,
+        "bucket": "10-29",
+        "coverage": 0.888,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.3,
+        "bucket": "30-99",
+        "coverage": 0.932,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.3,
+        "bucket": ">=100",
+        "coverage": 0.982,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.45,
+        "bucket": "<10",
+        "coverage": 0.935,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.45,
+        "bucket": "10-29",
+        "coverage": 0.922,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.45,
+        "bucket": "30-99",
+        "coverage": 0.959,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.45,
+        "bucket": ">=100",
+        "coverage": 0.993,
+        "cells": 94328
+      },
+      {
+        "alpha": 0.7,
+        "bucket": "<10",
+        "coverage": 0.938,
+        "cells": 4501953
+      },
+      {
+        "alpha": 0.7,
+        "bucket": "10-29",
+        "coverage": 0.953,
+        "cells": 993897
+      },
+      {
+        "alpha": 0.7,
+        "bucket": "30-99",
+        "coverage": 0.979,
+        "cells": 496606
+      },
+      {
+        "alpha": 0.7,
+        "bucket": ">=100",
+        "coverage": 0.997,
+        "cells": 94328
+      },
+      {
+        "alpha": 1.0,
+        "bucket": "<10",
+        "coverage": 0.941,
+        "cells": 4501953
+      },
+      {
+        "alpha": 1.0,
+        "bucket": "10-29",
+        "coverage": 0.969,
+        "cells": 993897
+      },
+      {
+        "alpha": 1.0,
+        "bucket": "30-99",
+        "coverage": 0.988,
+        "cells": 496606
+      },
+      {
+        "alpha": 1.0,
+        "bucket": ">=100",
+        "coverage": 0.999,
+        "cells": 94328
+      }
+    ]
+  },
+  "split_half_reliability": {
+    "all": {
+      "cells": 1521696,
+      "split_half_spearman": 0.915,
+      "spearman_brown_full": 0.955
+    },
+    "<10": {
+      "cells": 1056682,
+      "split_half_spearman": 0.831,
+      "spearman_brown_full": 0.908
+    },
+    "10-29": {
+      "cells": 267829,
+      "split_half_spearman": 0.463,
+      "spearman_brown_full": 0.633
+    },
+    "30-99": {
+      "cells": 158996,
+      "split_half_spearman": 0.705,
+      "spearman_brown_full": 0.827
+    },
+    ">=100": {
+      "cells": 38189,
+      "split_half_spearman": 0.863,
+      "spearman_brown_full": 0.926
+    }
+  },
+  "weekend": {
+    "saturday": [
+      {
+        "model": "B1 raw cell rate",
+        "spearman": 0.5347,
+        "wmae": 0.3272,
+        "deviance": 1.595
+      },
+      {
+        "model": "v7 posterior (b0=20)",
+        "spearman": 0.5331,
+        "wmae": 0.3324,
+        "deviance": 0.6316
+      },
+      {
+        "model": "v8 selected",
+        "spearman": 0.5359,
+        "wmae": 0.3363,
+        "deviance": 0.5969
+      }
+    ],
+    "sunday_holiday": [
+      {
+        "model": "B1 raw cell rate",
+        "spearman": 0.482,
+        "wmae": 0.225,
+        "deviance": 1.3175
+      },
+      {
+        "model": "v7 posterior (b0=20)",
+        "spearman": 0.4892,
+        "wmae": 0.2244,
+        "deviance": 0.4674
+      },
+      {
+        "model": "v8 selected",
+        "spearman": 0.4913,
+        "wmae": 0.228,
+        "deviance": 0.4375
+      }
+    ]
+  },
+  "runtime_s": 143.4
+}
