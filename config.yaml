@@ -1,0 +1,79 @@
+project: Delhi Crowdedness-Aware Journey Planner
+version: '8.0'
+seed: 42
+calendar:
+  start_date: '2026-10-01'
+  end_date: '2026-10-31'
+  holiday_dates:
+  - '2026-10-02'
+  - '2026-10-20'
+  pax_cap: 20
+  dedupe_tickets: true
+expansion:
+  kappa: 39.9
+  kappa_grid:
+  - 23.9
+  - 31.9
+  - 39.9
+  - 49.9
+  published_daily_ridership: 4080000.0
+  capacity_ceiling_factor: 1.5
+  cap_min_tickets: 30
+  cap_quantile: 0.99
+aggregation:
+  bin_minutes: 30
+  weekend_bin_minutes: 60
+  kernel:
+  - 0.15
+  - 0.7
+  - 0.15
+  prior_pseudo_trips: 20.0
+bayesian:
+  model: hierarchical Gamma-Poisson EB + NB2 week-to-week layer
+  prior_shape_a: 2.0
+  smoothing: false
+  alpha_by_bucket:
+  - 0.0
+  - 0.08
+  - 0.08
+  - 0.05
+  note: values are overwritten at run time by outputs/eval/summary.json (selected
+    on held-out weeks)
+  coverage_target: 0.8
+bus_capacities:
+  classes:
+    12m:
+      seats: 38
+      max_cap: 75
+    9m:
+      seats: 28
+      max_cap: 50
+  default_class: 12m
+  prefix_class: {}
+  note: vehicle_number prefix -> class. Empty until the operator fleet list confirms
+    which prefixes are 9 m buses.
+crowding_tiers:
+  seat_factor: 0.9
+  max_factor: 0.8
+  tier_names:
+  - Seats Available
+  - Standing Room
+  - Crowded
+  tier_weights:
+    Seats Available: 0.0
+    Standing Room: 0.5
+    Crowded: 1.5
+trust_thresholds:
+  high_tickets: 30
+  medium_tickets: 10
+  basis: split-half reliability by ticket bucket (outputs/eval/summary.json)
+routing:
+  transfer_penalty_min: 6.0
+  walk_speed_m_per_s: 1.1
+  max_transfer_walk_m: 300
+  cluster_radius_m: 400
+  min_stretch_segments: 2
+  mode_lam:
+    fastest: 0.0
+    balanced: 0.35
+    comfortable: 1.0
