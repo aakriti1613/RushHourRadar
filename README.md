@@ -12,8 +12,6 @@
 ![Data](https://img.shields.io/badge/tickets-2.56M-E69F00?style=flat-square)
 ![Not live](https://img.shields.io/badge/typical%20day-not%20live-D55E00?style=flat-square)
 
-[🌐 **Live website**](YOUR_WEBSITE_LINK_HERE) · [🎬 **Demo video**](YOUR_DEMO_VIDEO_LINK_HERE) · [📄 **Technical note**](docs/technical_note.md)
-
 *Built for Transport Stack Hackathon 2026 · Problem 2 · Phase 1*
 
 </div>
@@ -21,14 +19,13 @@
 ---
 
 ## 📸 See it
+<img width="1568" height="701" alt="plan" src="https://github.com/user-attachments/assets/067bbf46-1156-46aa-8804-15a648351810" />
 
-<!-- Add screenshots to a docs/images folder, then replace the paths below -->
+<img width="1568" height="701" alt="routes" src="https://github.com/user-attachments/assets/e67f1e7f-72c0-43c1-b096-bb2d8ed9f057" />
 
-| Plan a trip | Crowding on a route |
-|:---:|:---:|
-| ![Plan page](docs/images/plan.png) | ![Routes page](docs/images/routes.png) |
-| **For bus operators** | **Proof it works** |
-| ![Operators page](docs/images/operators.png) | ![Evidence page](docs/images/evidence.png) |
+<img width="1568" height="701" alt="operators" src="https://github.com/user-attachments/assets/75233d81-4e39-4597-a8a8-4315ce290c3c" />
+
+<img width="1568" height="701" alt="evidence" src="https://github.com/user-attachments/assets/12aaf20d-71ae-42b6-b3af-b1ce5067c3cd" />
 
 ---
 
@@ -196,26 +193,6 @@ tests/       32 automated tests
 docs/        Technical note, review, change log
 outputs/     All result files the website shows
 ```
-
----
-
-## 🎬 Demo
-
-<!-- Replace with your video / GIF -->
-**Video:** [YOUR_DEMO_VIDEO_LINK_HERE](YOUR_DEMO_VIDEO_LINK_HERE)
-
-**Try this:** Anand Vihar → Connaught Place, weekday, 6 PM.
-
----
-
-## 👥 Team
-
-<!-- Add names and links -->
-| Name | Role | Link |
-|---|---|---|
-| YOUR_NAME | | |
-| YOUR_NAME | | |
-| YOUR_NAME | | |
 
 ---
 
